@@ -1,0 +1,11 @@
+[Unit]
+Description=devmon
+
+[Service]
+User=root
+Group=root
+Type=simple
+ExecStart=/usr/bin/devmon
+
+[Install]
+WantedBy=multi-user.target
