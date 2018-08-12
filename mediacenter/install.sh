@@ -8,6 +8,8 @@ apt-get update
 apt -y install ./pkg/easy-x11.deb
 apt-get -y install udevil kodi plexmediaserver-installer git mopidy python-pip python-lxml bluealsa python-dbus
 python -m pip install Mopidy-Iris mopidy-gmusic
+rm -r /usr/lib/python2.7/dist-packages/pyasn1
+python -m pip install pyasn1-modules
 cp -r ./data/* /
 chmod +x /usr/local/bin/a2dp-agent
 sed -i 's/# #DiscoverableTimeout = 0/DiscoverableTimeout = 0/' /etc/bluetooth/main.conf
