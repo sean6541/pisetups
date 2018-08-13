@@ -13,7 +13,7 @@ cp -r ./data/* /
 chmod +x /usr/local/bin/a2dp-agent
 sed -i 's/# #DiscoverableTimeout = 0/DiscoverableTimeout = 0/' /etc/bluetooth/main.conf
 coproc bluetoothctl
-echo -e 'power on\ndiscoverable on\nexit' >&"${COPROC[1]}"
+echo -e 'power on\ndiscoverable on\nexit' >&${COPROC[1]}
 systemctl enable devmon.service
 systemctl enable mopidy.service
 systemctl enable bt-agent-a2dp.service
