@@ -11,7 +11,7 @@ rm -r /usr/lib/python2.7/dist-packages/pyasn1
 python -m pip install pyasn1-modules
 cp -r ./data/* /
 chmod +x /usr/local/bin/a2dp-agent
-sed -i 's/# #DiscoverableTimeout = 0/DiscoverableTimeout = 0/' /etc/bluetooth/main.conf
+sed -i 's/#DiscoverableTimeout = 0/DiscoverableTimeout = 0/' /etc/bluetooth/main.conf
 coproc bluetoothctl
 echo -e 'power on\ndiscoverable on\nexit' >&${COPROC[1]}
 systemctl enable devmon.service
