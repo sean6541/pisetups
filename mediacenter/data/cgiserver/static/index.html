@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./bootstrap.css">
+<link href="./styles.css" rel="stylesheet">
+<script src="./jquery.js"></script>
+<script src="./popper.js"></script>
+<script src="./bootstrap.js"></script>
+<script src="./main.js"></script>
+<title>PiServer</title>
+</head>
+<body>
+<div class="bodydiv">
+  <div class="card" style="width: 100%; max-width: 600px; margin: auto;">
+    <h2 class="card-header">PiServer Control Panel</h2>
+    <div class="card-body">
+      <div class="list-group">
+        <a class="list-group-item list-group-item-action" href="./wifi.html">WiFi Setup</a>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div style="float: right;">
+        <button type="button" class="btn btn-secondary" onclick="reboot()">Reboot</button>
+        <button type="button" class="btn btn-primary" onclick="shutdown()">Shut Down</button>
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

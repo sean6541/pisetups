@@ -1,0 +1,13 @@
+[Unit]
+Wants=network.target
+Before=network.target
+Description=bridge wlan0 to eth0
+
+[Service]
+User=root
+Group=root
+Type=simple
+ExecStart=/usr/bin/wlantolan
+
+[Install]
+WantedBy=multi-user.target

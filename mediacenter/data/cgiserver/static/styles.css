@@ -1,0 +1,77 @@
+body {
+    margin:0px;
+    background:#FAFAFA; }
+.bodydiv {
+    background:#FAFAFA;
+    border:0px solid #ccc;
+    padding:30px 60px;
+    font-size: 18px;
+    font-family: arial, helvetica, sans-serif; }
+.headdiv {
+    background:#BDBDBD;
+    border:0px solid #ccc;
+    padding:40px 60px;
+    font-size: 32px;
+    font-family: arial, helvetica, sans-serif;
+    font-weight: bold; }
+.bodytitlediv {
+    background:#FAFAFA;
+    border:0px solid #ccc;
+    padding:126px 60px 40px 60px;
+    font-size: 48px;
+    font-family: arial, helvetica, sans-serif;
+    text-align: center; }
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px){
+    body {
+        margin:0px;
+        background:#FAFAFA; }
+    .bodydiv {
+        background:#FAFAFA;
+        border:0px solid #ccc;
+        padding:15px 30px;
+        font-size: 14px;
+        font-family: arial, helvetica, sans-serif; }
+    .headdiv {
+        background:#BDBDBD;
+        border:0px solid #ccc;
+        padding:20px 30px;
+        font-size: 25px;
+        font-family: arial, helvetica, sans-serif;
+        font-weight: bold; }
+    .bodytitlediv {
+        background:#FAFAFA;
+        border:0px solid #ccc;
+        padding:91px 30px 20px 30px;
+        font-size: 38px;
+        font-family: arial, helvetica, sans-serif;
+        text-align: center; }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px){
+    body {
+        margin:0px;
+        background:#FAFAFA; }
+    .bodydiv {
+        background:#FAFAFA;
+        border:0px solid #ccc;
+        padding:15px 30px;
+        font-size: 14px;
+        font-family: arial, helvetica, sans-serif; }
+    .headdiv {
+        background:#BDBDBD;
+        border:0px solid #ccc;
+        padding:20px 30px;
+        font-size: 25px;
+        font-family: arial, helvetica, sans-serif;
+        font-weight: bold; }
+    .bodytitlediv {
+        background:#FAFAFA;
+        border:0px solid #ccc;
+        padding:91px 30px 20px 30px;
+        font-size: 38px;
+        font-family: arial, helvetica, sans-serif;
+        text-align: center; }
+}
