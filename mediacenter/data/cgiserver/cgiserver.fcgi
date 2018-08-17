@@ -50,7 +50,7 @@ def drive(**kwargs):
     if os.path.isdir(path):
         dirpath = '/' + kwargs['path']
         items = []
-        for entry in os.scandir(path):
+        for entry in sorted(os.scandir(path), key=lambda item: item.name.lower()):
             if entry.is_dir():
                 items.append({'type': 'Directory', 'name': entry.name, 'path': '/drive' + entry.path[6:] + '/'})
             else:
@@ -62,7 +62,7 @@ def drive(**kwargs):
 @app.route('/drive/')
 def drives():
     items = []
-    for entry in os.scandir('/media'):
+    for entry in sorted(os.scandir('/media'), key=lambda item: item.name.lower()):
         items.append({'type': 'Drive', 'name': entry.name, 'path': '/drive' + entry.path[6:] + '/'})
     return render_template('fm.html', path='/', items=items)
 
