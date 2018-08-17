@@ -9,17 +9,9 @@ from flask import request
 import json
 import pyfi
 import os
+from flask import render_template
 
 app.use_x_sendfile = True
-
-@app.route('/<path:path>.<string:ext>')
-def main(**kwargs):
-    path = './static/' + kwargs['path'] + '.' + kwargs['ext']
-    return send_file(path)
-
-@app.route('/')
-def index():
-    return send_file('./static/index.html')
 
 @app.route('/power', methods=['POST'])
 def power():
@@ -51,6 +43,37 @@ def connect():
         else:
             pyfi.connect(args['ssid'])
         return ''
+
+@app.route('/drive/<path:path>')
+def drive(**kwargs):
+    path = '/media/' + kwargs['path']
+    if os.path.isdir(path):
+        dirpath = '/' + kwargs['path']
+        items = []
+        for entry in os.scandir(path):
+            if entry.is_dir():
+                items.append({'type': 'Directory', 'name': entry.name, 'path': '/drive' + entry.path[6:] + '/'})
+            else:
+                items.append({'type': 'File', 'name': entry.name, 'path': '/drive' + entry.path[6:]})
+        return render_template('fm.html', path=dirpath, items=items)
+    else:
+        return send_file(path)
+
+@app.route('/drive/')
+def drives():
+    items = []
+    for entry in os.scandir('/media'):
+        items.append({'type': 'Drive', 'name': entry.name, 'path': '/drive' + entry.path[6:] + '/'})
+    return render_template('fm.html', path='/', items=items)
+
+@app.route('/<path:path>')
+def main(**kwargs):
+    path = './static/' + kwargs['path']
+    return send_file(path)
+
+@app.route('/')
+def index():
+    return send_file('./static/index.html')
 
 if __name__ == '__main__':
     WSGIServer(CGIRootFix(app)).run()

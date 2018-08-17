@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/bootstrap.css">
+<link href="/styles.css" rel="stylesheet">
+<script src="/jquery.js"></script>
+<script src="/popper.js"></script>
+<script src="/bootstrap.js"></script>
+<title>PiServer - {{ path }}</title>
+</head>
+<body>
+<div class="headdiv">
+<p>PiServer Files</p>
+</div>
+<div class="bodydiv">
+  <div class="card" style="margin-top: 15px;">
+    <div class="card-body">
+      <div><a href="../">Back (..)</a></div>
+    </div>
+  </div>
+{% for item in items %}
+  <div class="card" style="margin-top: 15px;">
+    <div class="card-body">
+      <div style="float: left;"><a href="{{ item['path'] }}">{{ item['name'] }}</a></div>
+      <div style="float: right;"><a class="text-muted">{{ item['type'] }}</a></div>
+      <div style="clear: both;"></div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+</body>
+</html>
