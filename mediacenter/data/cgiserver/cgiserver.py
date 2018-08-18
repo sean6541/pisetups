@@ -1,8 +1,6 @@
-#!/usr/bin/python3
-
-from flup.server.fcgi import WSGIServer
 from flask import Flask
 app = Flask(__name__)
+from flask import abort
 from flask.helpers import send_file
 from flask import request
 import json
@@ -56,7 +54,10 @@ def drive(**kwargs):
                 items.append({'type': 'File', 'name': entry.name, 'path': '/drive' + entry.path[6:]})
         return render_template('fm.html', path=dirpath, items=items)
     else:
-        return send_file(path)
+        if os.path.isfile(path):
+            return send_file(path)
+        else:
+            abort(404)
 
 @app.route('/drive/')
 def drives():
@@ -68,11 +69,15 @@ def drives():
 @app.route('/<path:path>')
 def main(**kwargs):
     path = './static/' + kwargs['path']
-    return send_file(path)
+    if os.path.isfile(path):
+        return send_file(path)
+    else:
+        abort(404)
 
 @app.route('/')
 def index():
-    return send_file('./static/index.html')
-
-if __name__ == '__main__':
-    WSGIServer(app).run()
+    path = './static/index.html'
+    if os.path.isfile(path):
+        return send_file(path)
+    else:
+        abort(404)
