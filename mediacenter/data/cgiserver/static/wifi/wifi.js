@@ -75,8 +75,7 @@ function scan() {
   $('#scanbtn').text('Scanning...');
   $('#scanbtn').prop('disabled', 'disabled');
   $('#cth').prop('disabled', 'disabled');
-  $.get('/config/wifi/scan', function(data) {
-    networks = JSON.parse(data);
+  $.get('/config/wifi/scan', function(networks) {
     $('#ssids').html('');
     $.each(networks, function (i, network) {
       elem = $(document.createElement('button'));
@@ -94,5 +93,5 @@ function scan() {
       $('#scanbtn').removeAttr('disabled');
       $('#cth').removeAttr('disabled');
     });
-  });
+  }, 'json');
 }

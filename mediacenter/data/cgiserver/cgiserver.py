@@ -7,6 +7,7 @@ import json
 import pyfi
 import os
 from flask import render_template
+from flask import Response
 
 app.use_x_sendfile = True
 
@@ -21,12 +22,12 @@ def power():
             os.system('sudo reboot')
         elif args['mode'] == 'shutdown':
             os.system('sudo shutdown now')
-        return ''
+        return Response()
 
 @app.route('/config/wifi/scan', methods=['GET'])
 def scan():
     networks = pyfi.scan()
-    return json.dumps(networks)
+    return Response(json.dumps(networks), mimetype='application/json')
 
 @app.route('/config/wifi/connect', methods=['POST'])
 def connect():
@@ -39,7 +40,7 @@ def connect():
             pyfi.connect(args['ssid'], args['psk'])
         else:
             pyfi.connect(args['ssid'])
-        return ''
+        return Response()
 
 @app.route('/drive/<path:path>')
 def drive(**kwargs):
