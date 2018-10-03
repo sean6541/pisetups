@@ -1,22 +1,23 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/bootstrap.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="/bootstrap.min.css" rel="stylesheet">
 <link href="/styles.css" rel="stylesheet">
-<script src="/jquery.js"></script>
-<script src="/popper.js"></script>
-<script src="/bootstrap.js"></script>
+<script src="/jquery-3.3.1.min.js"></script>
+<script src="/popper.min.js"></script>
+<script src="/bootstrap.min.js"></script>
 <script src="./wifi.js"></script>
 <title>PiServer - WiFi</title>
 </head>
 <body>
-  <div class="modal fade" id="connectDialog" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+  <div class="modal fade" id="connectDialog">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header grayout">
           <h5 class="modal-title" id="title"></h5>
-          <button type="button" class="close disableable" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close disableable" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -44,7 +45,7 @@
       </div>
     </div>
   </div>
-<div class="bodydiv">
+<div class="padded">
   <div class="card" style="width: 100%; max-width: 600px; margin: auto;">
     <h2 class="card-header">WiFi Setup</h2>
     <div class="card-body">

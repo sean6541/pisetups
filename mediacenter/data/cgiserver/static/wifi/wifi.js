@@ -78,17 +78,8 @@ function scan() {
   $.get('/config/wifi/scan', function(networks) {
     $('#ssids').html('');
     $.each(networks, function (i, network) {
-      elem = $(document.createElement('button'));
-      elem.attr('type', 'button');
-      elem.addClass('list-group-item');
-      elem.addClass('list-group-item-action');
-      elem.attr('data-man', false);
-      elem.attr('data-toggle', 'modal');
-      elem.attr('data-target', '#connectDialog');
-      elem.attr('data-ssid', network.ssid);
-      elem.attr('data-enc', network.enc);
-      elem.text(network.ssid);
-      $('#ssids').append(elem);
+      html = '<button type="button" class="list-group-item list-group-item-action" data-man="false" data-toggle="modal" data-target="#connectDialog" data-ssid="' + network.ssid + '" data-enc="' + network.enc + '">' + network.ssid + '</button>';
+      $('#ssids').html(html);
       $('#scanbtn').text('Scan');
       $('#scanbtn').removeAttr('disabled');
       $('#cth').removeAttr('disabled');

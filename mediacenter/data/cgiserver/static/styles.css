@@ -1,37 +1,32 @@
 body {
   margin: 0px;
-  background: #FAFAFA;
 }
-.bodydiv {
-  padding: 30px 60px;
-  font-size: 18px;
-  font-family: arial, helvetica, sans-serif;
-}
-.headdiv {
+
+.snglpg-title {
+  width: 100%;
+  padding: 30px;
   background: #BDBDBD;
-  padding: 40px 60px;
-  font-size: 32px;
-  font-family: arial, helvetica, sans-serif;
-  font-weight: bold;
 }
-.bodytitlediv {
-  padding: 126px 60px 40px 60px;
-  font-size: 48px;
-  font-family: arial, helvetica, sans-serif;
+
+.padded {
+  padding: 30px;
+}
+
+.multipg-title {
+  margin: 35px 30px 5px 30px;
   text-align: center;
 }
 
-@media only screen and (max-width : 768px){
-  .bodydiv {
-    padding: 15px 30px;
-    font-size: 14px;
+@media (min-width: 992px) {
+  .snglpg-title {
+    padding: 40px;
   }
-  .headdiv {
-    padding: 20px 30px;
-    font-size: 25px;
+
+  .padded {
+    padding: 40px;
   }
-  .bodytitlediv {
-    padding: 91px 30px 20px 30px;
-    font-size: 38px;
+
+  .multipg-title {
+    margin: 103px 40px 7px 40px;
   }
 }
