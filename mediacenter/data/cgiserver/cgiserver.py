@@ -2,10 +2,10 @@ from flask import Flask
 app = Flask(__name__)
 from flask import abort
 from flask.helpers import send_file
+import os
 from flask import request
 import json
 import pyfi
-import os
 from flask import render_template
 from flask import Response
 
