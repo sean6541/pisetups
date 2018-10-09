@@ -13,34 +13,41 @@ app.use_x_sendfile = True
 
 @app.route('/power', methods=['POST'])
 def power():
-    if request.is_json:
-        args = request.json
-    else:
-        args = request.form
-    if 'mode' in args:
-        if args['mode'] == 'reboot':
-            os.system('sudo reboot')
-        elif args['mode'] == 'shutdown':
-            os.system('sudo shutdown now')
-        return Response()
+    if not request.is_json:
+        return Response(json.dumps({'success': False}), mimetype='application/json')
+    try:
+        if 'mode' in request.json:
+            if args['mode'] == 'reboot':
+                os.system('sudo reboot')
+                return Response(json.dumps({'success': True}), mimetype='application/json')
+            elif args['mode'] == 'shutdown':
+                os.system('sudo shutdown now')
+                return Response(json.dumps({'success': True}), mimetype='application/json')
+    except:
+        return Response(json.dumps({'success': False}), mimetype='application/json')
 
 @app.route('/config/wifi/scan', methods=['GET'])
 def scan():
-    networks = pyfi.scan()
-    return Response(json.dumps(networks), mimetype='application/json')
+    try:
+        networks = pyfi.scan()
+        return Response(json.dumps({'success': True, 'result': networks}), mimetype='application/json')
+    except:
+        return Response(json.dumps({'success': False}), mimetype='application/json')
 
 @app.route('/config/wifi/connect', methods=['POST'])
 def connect():
-    if request.is_json:
-        args = request.json
-    else:
-        args = request.form
-    if 'ssid' in args:
-        if 'psk' in args:
-            pyfi.connect(args['ssid'], args['psk'])
-        else:
-            pyfi.connect(args['ssid'])
-        return Response()
+    if not request.is_json:
+        return Response(json.dumps({'success': False}), mimetype='application/json')
+    try:
+        if 'ssid' in request.json:
+            if 'psk' in request.json:
+                pyfi.connect(request.json['ssid'], request.json['psk'])
+                return Response(json.dumps({'success': True}), mimetype='application/json')
+            else:
+                pyfi.connect(request.json['ssid'])
+                return Response(json.dumps({'success': True}), mimetype='application/json')
+    except:
+        return Response(json.dumps({'success': False}), mimetype='application/json')
 
 @app.route('/drive/<path:path>')
 def drive(**kwargs):
