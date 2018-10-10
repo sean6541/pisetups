@@ -38,13 +38,16 @@ def scan():
 def connect():
     if not request.is_json:
         return Response(json.dumps({'success': False}), mimetype='application/json')
-    if 'ssid' in request.json:
-        if 'psk' in request.json:
-            pyfi.connect(request.json['ssid'], request.json['psk'])
-            return Response(json.dumps({'success': True}), mimetype='application/json')
-        else:
-            pyfi.connect(request.json['ssid'])
-            return Response(json.dumps({'success': True}), mimetype='application/json')
+    try:
+        if 'ssid' in request.json:
+            if 'psk' in request.json:
+                pyfi.connect(request.json['ssid'], request.json['psk'])
+                return Response(json.dumps({'success': True}), mimetype='application/json')
+            else:
+                pyfi.connect(request.json['ssid'])
+                return Response(json.dumps({'success': True}), mimetype='application/json')
+    except:
+        return Response(json.dumps({'success': False}), mimetype='application/json')
 
 @app.route('/drive/<path:path>')
 def drive(**kwargs):
