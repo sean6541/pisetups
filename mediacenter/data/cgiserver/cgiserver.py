@@ -15,13 +15,16 @@ app.use_x_sendfile = True
 def power():
     if not request.is_json:
         return Response(json.dumps({'success': False}), mimetype='application/json')
-    if 'mode' in request.json:
-        if args['mode'] == 'reboot':
-            os.system('sudo reboot')
-            return Response(json.dumps({'success': True}), mimetype='application/json')
-        elif args['mode'] == 'shutdown':
-            os.system('sudo shutdown now')
-            return Response(json.dumps({'success': True}), mimetype='application/json')
+    try:
+        if 'mode' in request.json:
+            if request.json['mode'] == 'reboot':
+                os.system('sudo reboot')
+                return Response(json.dumps({'success': True}), mimetype='application/json')
+            elif request.json['mode'] == 'shutdown':
+                os.system('sudo shutdown now')
+                return Response(json.dumps({'success': True}), mimetype='application/json')
+    except:
+        return Response(json.dumps({'success': False}), mimetype='application/json')
 
 @app.route('/config/wifi/scan', methods=['GET'])
 def scan():
