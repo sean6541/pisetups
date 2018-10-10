@@ -28,9 +28,23 @@ window.onload = function() {
         startconn();
         if(enc) {
           psk = modal.find('#psk').val();
-          $.post('/config/wifi/connect', {ssid: ssid, psk: psk}, endconn);
+          $.ajax({
+            type: 'POST',
+            url: '/config/wifi/connect',
+            contentType: 'application/json',
+            data: JSON.stringify({ssid: ssid, psk: psk}),
+            success: endconn,
+            dataType: 'json'
+          });
         } else {
-          $.post('/config/wifi/connect', {ssid: ssid}, endconn);
+          $.ajax({
+            type: 'POST',
+            url: '/config/wifi/connect',
+            contentType: 'application/json',
+            data: JSON.stringify({ssid: ssid}),
+            success: endconn,
+            dataType: 'json'
+          });
         }
       });
     } else if(button.data('man') == true) {
@@ -53,9 +67,23 @@ window.onload = function() {
         ssid = modal.find('#ssid').val();
         if(enc) {
           psk = modal.find('#psk').val();
-          $.post('/config/wifi/connect', {ssid: ssid, psk: psk}, endconn);
+          $.ajax({
+            type: 'POST',
+            url: '/config/wifi/connect',
+            contentType: 'application/json',
+            data: JSON.stringify({ssid: ssid, psk: psk}),
+            success: endconn,
+            dataType: 'json'
+          });
         } else {
-          $.post('/config/wifi/connect', {ssid: ssid}, endconn);
+          $.ajax({
+            type: 'POST',
+            url: '/config/wifi/connect',
+            contentType: 'application/json',
+            data: JSON.stringify({ssid: ssid}),
+            success: endconn,
+            dataType: 'json'
+          });
         }
       });
     }
