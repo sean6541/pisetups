@@ -8,6 +8,8 @@ python3 -m pip install flask flup
 cp -r ./data/* /
 systemctl enable devmon.service
 chmod -R 755 /cgiserver
+chown pi:users /etc/wpa_supplicant/wpa_supplicant.conf
+chmod 777 /etc/wpa_supplicant/wpa_supplicant.conf
 a2dissite 000-default
 a2ensite cgiserver
 service apache2 restart
