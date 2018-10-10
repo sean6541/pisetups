@@ -83,6 +83,7 @@ function scan() {
   $.get('/config/wifi/scan', function(data) {
     if (data.success) {
       $('#ssids').html('');
+      html = '';
       $.each(data.result, function (i, network) {
         html += '<button type="button" class="list-group-item list-group-item-action" data-man="false" data-toggle="modal" data-target="#connectDialog" data-ssid="' + network.ssid + '" data-enc="' + network.enc + '">' + network.ssid + '</button>\n';
       });
