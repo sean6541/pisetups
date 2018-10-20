@@ -93,12 +93,7 @@ window.onload = function() {
       modal.find('#connect').text('Connecting...');
     }
     function endconn(data) {
-      if (data.success) {
-        modal.modal('hide');
-      } else {
-        alert('An error has occured');
-        modal.modal('hide');
-      }
+      modal.modal('hide');
     }
   });
   scan();
@@ -109,21 +104,14 @@ function scan() {
   $('#scanbtn').prop('disabled', 'disabled');
   $('#cth').prop('disabled', 'disabled');
   $.get('/config/wifi/scan', function(data) {
-    if (data.success) {
-      $('#ssids').html('');
-      html = '';
-      $.each(data.result, function (i, network) {
-        html += '<button type="button" class="list-group-item list-group-item-action" data-man="false" data-toggle="modal" data-target="#connectDialog" data-ssid="' + network.ssid + '" data-enc="' + network.enc + '">' + network.ssid + '</button>\n';
-      });
-      $('#ssids').html(html);
-      $('#scanbtn').text('Scan');
-      $('#scanbtn').removeAttr('disabled');
-      $('#cth').removeAttr('disabled');
-    } else {
-      $('#scanbtn').text('Scan');
-      $('#scanbtn').removeAttr('disabled');
-      $('#cth').removeAttr('disabled');
-      alert('An error has occured')
-    }
+    $('#ssids').html('');
+    html = '';
+    $.each(data, function (i, network) {
+      html += '<button type="button" class="list-group-item list-group-item-action" data-man="false" data-toggle="modal" data-target="#connectDialog" data-ssid="' + network.ssid + '" data-enc="' + network.enc + '">' + network.ssid + '</button>\n';
+    });
+    $('#ssids').html(html);
+    $('#scanbtn').text('Scan');
+    $('#scanbtn').removeAttr('disabled');
+    $('#cth').removeAttr('disabled');
   }, 'json');
 }
