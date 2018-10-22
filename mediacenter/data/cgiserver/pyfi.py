@@ -2,9 +2,9 @@ import os
 import re
 
 def scan():
-    op = os.popen('sudo iwlist wlan0 scan').read()
+    output = os.popen('sudo iwlist wlan0 scan').read()
     networks = []
-    cells = re.findall(r'(.*Cell.*(\n|.)*?(?=(.*Cell)|$))', op)
+    cells = re.findall(r'(.*Cell.*(\n|.)*?(?=(.*Cell)|$))', output)
     for cell in cells:
         ssid = re.findall(r'.*ESSID:"(.*?)"', cell[0])[0]
         if ssid != '':

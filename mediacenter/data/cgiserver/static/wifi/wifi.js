@@ -1,5 +1,5 @@
 window.onload = function() {
-  $('#connectDialog').on('hidden.bs.modal', function(event) {
+  $('#connect_dialog').on('hidden.bs.modal', function(event) {
     modal = $(this);
     modal.find('.grayout').css('opacity', 1.0);
     modal.find('.disableable').removeAttr('disabled');
@@ -7,12 +7,12 @@ window.onload = function() {
     modal.find('#ssidc').hide();
     modal.find('#ssid').val('');
     modal.find('#nopsk').hide();
-    modal.find('#pskcheck').hide();
+    modal.find('#haspskc').hide();
     modal.find('#haspsk').prop('checked', false);
     modal.find('#pskc').hide();
     modal.find('#psk').val('');
   });
-  $('#connectDialog').on('show.bs.modal', function(event) {
+  $('#connect_dialog').on('show.bs.modal', function(event) {
     modal = $(this);
     button = $(event.relatedTarget);
     if(button.data('man') == false) {
@@ -25,7 +25,7 @@ window.onload = function() {
       }
       modal.find('#title').text(ssid);
       modal.find('#connect').on('click', function() {
-        startconn();
+        start_conn();
         if(enc) {
           psk = modal.find('#psk').val();
           $.ajax({
@@ -33,7 +33,7 @@ window.onload = function() {
             url: '/config/wifi/connect',
             contentType: 'application/json',
             data: JSON.stringify({ssid: ssid, psk: psk}),
-            success: endconn,
+            success: end_conn,
             dataType: 'json'
           });
         } else {
@@ -42,7 +42,7 @@ window.onload = function() {
             url: '/config/wifi/connect',
             contentType: 'application/json',
             data: JSON.stringify({ssid: ssid}),
-            success: endconn,
+            success: end_conn,
             dataType: 'json'
           });
         }
@@ -51,7 +51,7 @@ window.onload = function() {
       enc = true;
       modal.find('#ssidc').show();
       modal.find('#pskc').show();
-      modal.find('#pskcheck').show();
+      modal.find('#haspskc').show();
       modal.find('#haspsk').on('change', function() {
         if($(this).is(':checked')) {
           enc = false;
@@ -63,7 +63,7 @@ window.onload = function() {
       });
       modal.find('#title').text('Hidden');
       modal.find('#connect').on('click', function() {
-        startconn();
+        start_conn();
         ssid = modal.find('#ssid').val();
         if(enc) {
           psk = modal.find('#psk').val();
@@ -72,7 +72,7 @@ window.onload = function() {
             url: '/config/wifi/connect',
             contentType: 'application/json',
             data: JSON.stringify({ssid: ssid, psk: psk}),
-            success: endconn,
+            success: end_conn,
             dataType: 'json'
           });
         } else {
@@ -81,18 +81,18 @@ window.onload = function() {
             url: '/config/wifi/connect',
             contentType: 'application/json',
             data: JSON.stringify({ssid: ssid}),
-            success: endconn,
+            success: end_conn,
             dataType: 'json'
           });
         }
       });
     }
-    function startconn() {
+    function start_conn() {
       modal.find('.disableable').prop('disabled', 'disabled');
       modal.find('.grayout').css('opacity', 0.6);
       modal.find('#connect').text('Connecting...');
     }
-    function endconn(data) {
+    function end_conn(data) {
       modal.modal('hide');
     }
   });
@@ -107,7 +107,7 @@ function scan() {
     $('#ssids').html('');
     html = '';
     $.each(data, function (i, network) {
-      html += '<button type="button" class="list-group-item list-group-item-action" data-man="false" data-toggle="modal" data-target="#connectDialog" data-ssid="' + network.ssid + '" data-enc="' + network.enc + '">' + network.ssid + '</button>\n';
+      html += '<button type="button" class="list-group-item list-group-item-action" data-man="false" data-toggle="modal" data-target="#connect_dialog" data-ssid="' + network.ssid + '" data-enc="' + network.enc + '">' + network.ssid + '</button>\n';
     });
     $('#ssids').html(html);
     $('#scanbtn').text('Scan');

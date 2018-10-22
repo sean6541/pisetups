@@ -40,14 +40,14 @@ def connect():
 def drive(**kwargs):
     path = '/media/' + kwargs['path']
     if os.path.isdir(path):
-        dirpath = '/' + kwargs['path']
+        dir_path = '/' + kwargs['path']
         items = []
         for entry in sorted(os.scandir(path), key=lambda item: item.name.lower()):
             if entry.is_dir():
                 items.append({'type': 'Directory', 'name': entry.name, 'path': '/drive' + entry.path[6:] + '/'})
             else:
                 items.append({'type': 'File', 'name': entry.name, 'path': '/drive' + entry.path[6:]})
-        return render_template('fm.html', path=dirpath, items=items)
+        return render_template('fm.html', path=dir_path, items=items)
     else:
         if os.path.isfile(path):
             return send_file(path)

@@ -12,7 +12,7 @@
 <title>PiServer - WiFi</title>
 </head>
 <body>
-  <div class="modal fade" id="connectDialog">
+  <div class="modal fade" id="connect_dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header grayout">
@@ -27,7 +27,7 @@
             <input class="form-control disableable" id="ssid">
           </div>
           <a id="nopsk" style="display: none;">Open</a>
-          <div class="form-check" id="pskcheck" style="margin-bottom: 13px; display: none;">
+          <div class="form-check" id="haspskc" style="margin-bottom: 13px; display: none;">
             <input class="form-check-input disableable" type="checkbox" id="haspsk">
             <label class="form-check-label" for="haspsk">
               Open
@@ -53,7 +53,7 @@
       </div>
     </div>
     <div class="card-footer">
-      <button type="button" class="btn btn-secondary" style="float: left;" data-man="true" data-toggle="modal" data-target="#connectDialog" id="cth">Connect To Hidden</button>
+      <button type="button" class="btn btn-secondary" style="float: left;" data-man="true" data-toggle="modal" data-target="#connect_dialog" id="cth">Connect To Hidden</button>
       <button type="button" class="btn btn-primary" style="float: right;" id="scanbtn" onclick="scan()">Scan</button>
       <div style="clear: both;"></div>
     </div>
