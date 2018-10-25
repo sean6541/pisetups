@@ -21,12 +21,12 @@ def power():
             os.system('sudo shutdown now')
             return
 
-@app.route('/config/wifi/scan', methods=['GET'])
+@app.route('/wifi/scan', methods=['GET'])
 def scan():
     networks = pyfi.scan()
     return Response(json.dumps(networks), mimetype='application/json')
 
-@app.route('/config/wifi/connect', methods=['POST'])
+@app.route('/wifi/connect', methods=['POST'])
 def connect():
     if 'ssid' in request.json:
         if 'psk' in request.json:

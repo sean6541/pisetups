@@ -30,7 +30,7 @@ window.onload = function() {
           psk = modal.find('#psk').val();
           $.ajax({
             type: 'POST',
-            url: '/config/wifi/connect',
+            url: '/wifi/connect',
             contentType: 'application/json',
             data: JSON.stringify({ssid: ssid, psk: psk}),
             success: end_conn,
@@ -39,7 +39,7 @@ window.onload = function() {
         } else {
           $.ajax({
             type: 'POST',
-            url: '/config/wifi/connect',
+            url: '/wifi/connect',
             contentType: 'application/json',
             data: JSON.stringify({ssid: ssid}),
             success: end_conn,
@@ -69,7 +69,7 @@ window.onload = function() {
           psk = modal.find('#psk').val();
           $.ajax({
             type: 'POST',
-            url: '/config/wifi/connect',
+            url: '/wifi/connect',
             contentType: 'application/json',
             data: JSON.stringify({ssid: ssid, psk: psk}),
             success: end_conn,
@@ -78,7 +78,7 @@ window.onload = function() {
         } else {
           $.ajax({
             type: 'POST',
-            url: '/config/wifi/connect',
+            url: '/wifi/connect',
             contentType: 'application/json',
             data: JSON.stringify({ssid: ssid}),
             success: end_conn,
@@ -103,7 +103,7 @@ function scan() {
   $('#scanbtn').text('Scanning...');
   $('#scanbtn').prop('disabled', 'disabled');
   $('#cth').prop('disabled', 'disabled');
-  $.get('/config/wifi/scan', function(data) {
+  $.get('/wifi/scan', function(data) {
     $('#ssids').html('');
     html = '';
     $.each(data, function (i, network) {
