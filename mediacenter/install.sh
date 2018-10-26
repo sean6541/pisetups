@@ -3,11 +3,10 @@
 wget -O - https://dev2day.de/pms/dev2day-pms.gpg.key | apt-key add -
 echo 'deb https://dev2day.de/pms/ stretch main' > /etc/apt/sources.list.d/pms.list
 apt-get update
-apt-get -y install udevil apache2 libapache2-mod-xsendfile libapache2-mod-wsgi-py3 python3-pip plexmediaserver-installer
-python3 -m pip install flask flup
+apt-get -y install udevil python3 python3-flask apache2 libapache2-mod-wsgi-py3 libapache2-mod-xsendfile plexmediaserver-installer
 cp -r ./data/* /
 systemctl enable devmon.service
-chmod -R 755 /cgiserver
+chmod -R 755 /var/www/cgiserver
 chown pi:users /etc/wpa_supplicant/wpa_supplicant.conf
 chmod 777 /etc/wpa_supplicant/wpa_supplicant.conf
 a2dissite 000-default
