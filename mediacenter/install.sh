@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wget -O - https://dev2day.de/pms/dev2day-pms.gpg.key | apt-key add -
+wget -O - https://dev2day.de/pms/dev2day-pms.gpg.key | apt-key add
 echo 'deb https://dev2day.de/pms/ stretch main' > /etc/apt/sources.list.d/pms.list
 apt-get update
 apt-get -y install udevil python3 python3-flask apache2 libapache2-mod-wsgi-py3 libapache2-mod-xsendfile plexmediaserver-installer
