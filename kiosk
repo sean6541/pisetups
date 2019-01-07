@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Script to setup fresh Raspbian Lite installation as a kiosk with virtual keyboard
+# Usage:
+#   kiosk URL
+########
+
+# Enable Autologin
+raspi-config nonint do_boot_behaviour B2
+
+# Install packages
+apt-get update
+apt-get install -y --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox matchbox-keyboard chromium-browser
+
+# Setup chromium to start when X starts
+cat << "EOF" > /etc/xdg/openbox/autostart
+xset s off
+xset s noblank
+xset -dpms
+matchbox-keyboard --daemon &
+sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/chromium/'Local State'
+sed -i 's/"exited_cleanly":false/"exited_cleanly":true/; s/"exit_type":"[^"]\+"/"exit_type":"Normal"/' ~/.config/chromium/Default/Preferences
+chromium-browser --touch-events=enabled --disable-pinch --noerrdialogs --disable-session-crashed-bubble --disable-infobars --kiosk '{url}'
+EOF
+sed -i -e '/s/{url}/$1/g' /etc/xdg/openbox/autostart
+
+# Setup X to start at autologin
+cat << "EOF" >> /home/pi/.bash_profile
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx -- -nocursor
+EOF
