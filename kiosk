@@ -21,4 +21,4 @@ chromium-browser --kiosk --touch-events=enabled --disable-pinch --noerrdialogs -
 EOF
 
 # Setup X to start at autologin
-echo "[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx -- -nocursor" >> /home/pi/.bash_profile
+echo "startx -- -nocursor" >> /home/pi/.bash_profile
