@@ -7,17 +7,21 @@ raspi-config nonint do_boot_behaviour B2
 
 # Install packages
 apt-get update
-apt-get install -y --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox matchbox-keyboard chromium-browser
+apt-get install -y --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox chromium-browser
+mkdir /home/pi/.chrome_keyboard_ext
+wget -O /home/pi/chrome_keyboard_ext.tar.gz
+tar -xzf /home/pi/chrome_keyboard_ext.tar.gz -C /home/pi/.chrome_keyboard_ext
+rm /home/pi/chrome_keyboard_ext.tar.gz
+chown -R pi:users /home/pi/.chrome_keyboard_ext
 
 # Setup chromium to start when X starts
 cat << "EOF" > /etc/xdg/openbox/autostart
 xset s off
 xset s noblank
 xset -dpms
-matchbox-keyboard --daemon &
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/chromium/'Local State'
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/; s/"exit_type":"[^"]\+"/"exit_type":"Normal"/' ~/.config/chromium/Default/Preferences
-chromium-browser --touch-events=enabled --disable-pinch --noerrdialogs --disable-session-crashed-bubble --disable-infobars --kiosk '$(cat /etc/kiosk_url)'
+chromium-browser --touch-events=enabled --disable-pinch --noerrdialogs --disable-session-crashed-bubble --disable-infobars --kiosk "$(cat /etc/kiosk_url)"
 EOF
 
 # Setup X to start at autologin
