@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Script to setup fresh Raspbian Lite installation as a kiosk with virtual keyboard
+# Script to setup fresh Raspbian Lite installation as a kiosk
 ########
 
 # Enable Autologin
@@ -7,14 +7,13 @@ raspi-config nonint do_boot_behaviour B2
 
 # Install packages
 apt-get update
-apt-get install -y --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox matchbox-keyboard chromium-browser
+apt-get install -y --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox chromium-browser
 
 # Setup chromium to start when X starts
 cat << "EOF" > /etc/xdg/openbox/autostart
 xset s off
 xset s noblank
 xset -dpms
-matchbox-window-manager -use_titlebar no &
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/chromium/'Local State'
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/; s/"exit_type":"[^"]\+"/"exit_type":"Normal"/' ~/.config/chromium/Default/Preferences
 chromium-browser --touch-events=enabled --disable-pinch --noerrdialogs --disable-session-crashed-bubble --disable-infobars --kiosk "$(cat /etc/kiosk_url)"
