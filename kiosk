@@ -19,7 +19,7 @@ xset s noblank
 xset -dpms
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/chromium/'Local State'
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/; s/"exit_type":"[^"]\+"/"exit_type":"Normal"/' ~/.config/chromium/Default/Preferences
-chromium-browser --touch-events=enabled --disable-pinch --noerrdialogs --disable-session-crashed-bubble --disable-infobars --allow-running-insecure-content --kiosk "$(cat /etc/kiosk_url)"
+chromium-browser --touch-events=enabled --disable-pinch --noerrdialogs --disable-session-crashed-bubble --disable-infobars --kiosk "$(cat /etc/kiosk_url)"
 EOF
 
 # Setup X to start at autologin
